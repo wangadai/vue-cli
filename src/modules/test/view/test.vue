@@ -1,25 +1,20 @@
 <template>
     <div class="card-box">
-        11111111111111111111111111111
+        1111111111111111111122222
     </div>
 </template>
 
 <script>
-
 export default {
     components: {
         
     },
     data() {
-        return {
-            
-        }
+        return {}
     },
     mounted() {
         
     },
-    methods: {
-        
-    }
+    methods: {}
 };
 </script>

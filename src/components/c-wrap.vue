@@ -1,14 +1,10 @@
 <template lang="html">
-    <div id="wrapper" class="forced" :class="{'enlarged':menuMini}">
+    <div id="wrapper">
         <div class="topbar">
-            <div class="topbar-left">
-                <div class="text-center">
-                    <a href="index.html" class="logo"><i class="iconfont icon-magnet icon-c-logo">&#xe67e;</i><span><img src="" width="165"></span></a>
-                </div>
-            </div>
+            
         </div>
-        <div class="content-page">
-            <div class="content">
+        <div >
+            <div>
                 <transition name="fade" mode="out-in">
                     <router-view></router-view>
                 </transition>
@@ -20,18 +16,16 @@
 <script>
 export default {
     data(){
-        return {
-            
-        }
+        return {}
     },
     created(){
-
+        
     },
 	mounted(){
 		
 	},
     methods:{
-        
+
     }
 }
 </script>

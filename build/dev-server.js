@@ -71,7 +71,7 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 
-app.get('/admin5/:viewname.html', function(req, res, next) {
+app.get('/:viewname.html', function(req, res, next) {
   var viewname = req.params.viewname
     ? req.params.viewname + '.html'
     : 'index.html';
@@ -89,11 +89,6 @@ app.get('/admin5/:viewname.html', function(req, res, next) {
   });
 });
 
-
-// 接口数据Mock
-if( env.NODE_ENV === 'development' ){
-  require('../ajax')( router );
-}
 
 //404
 app.use(function(req, res, next) {

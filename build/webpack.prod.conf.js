@@ -86,7 +86,7 @@ for (var pathname in pages) {
   //console.log("template:" + pages[pathname]);
   (function (path){
     var conf = {
-      filename: path.replace(/modules/g,'modules/admin5') + '.html',
+      filename: path + '.html',
       templateContent: function (templateParams, compilation){
         var tc = jetpack.read( pages[path]);
         tc = htmlXXXInject.headMetaDataInject(tc, header_metadata);
