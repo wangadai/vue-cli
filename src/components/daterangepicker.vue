@@ -20,7 +20,7 @@ time Array [开始时间，结束时间]
 <template>
 	<article class="dib">
 		<div class="ui-slt-date dib vm" data-ui-daterang>
-			<input v-validate :data-rules="'required:'+placeholder || '请选择时间'+'！'" data-vv-delay="500" type="text" :name="config.id || 'daterangepicker'" class="form-control input-sm dib" :class="width" :id="config.id || 'daterangepicker'" :placeholder="placeholder || '选择时间'" readonly>
+			<input v-validate data-rules="required:请选择时间！" data-vv-delay="500" type="text" :name="config.id || 'daterangepicker'" class="form-control input-sm dib" :class="width" :id="config.id || 'daterangepicker'" :placeholder="placeholder || '选择时间'" readonly>
 		</div>
 	</article>
 </template>
@@ -47,11 +47,15 @@ time Array [开始时间，结束时间]
 				if (v) this.checkTime();
 			},
 			time(v) {
-				if (v) {
-					$('#' + this.config.id || 'daterangepicker').val(this.$getLocalTime(v[0]) + ' - ' + this.$getLocalTime(v[1]));
+				if (v && v[0]) {
+					let val = v[1] ? this.$getLocalTime(v[0]) + ' - ' + this.$getLocalTime(v[1]) : this.$getLocalTime(v[0])
+					$('#' + this.config.id || 'daterangepicker').val(val);
 					this.startDate = +moment(v[0]);
 					this.endDate = +moment(v[1]);
 				}
+			},
+			startDate(v) {
+				if (v) this.checkTime();
 			}
 		},
 		methods:{
@@ -75,6 +79,7 @@ time Array [开始时间，结束时间]
 				_this.maxDate	 = ops.max||'';
 
 				let datepickerOpt = {
+					clearBtnFlag: ops.clear || false,
 					singleDatePicker:ops.single,
 		            timePickerIncrement: 5,
 					timePicker: ops.time||false,
@@ -89,6 +94,7 @@ time Array [开始时间，结束时间]
 		            	format: fType,
 		            	applyLabel: "确定",
 		            	cancelLabel: "取消",
+		            	clearLabel: "清空",
 		            	customRangeLabel:'自定义',
 		            	daysOfWeek: ['日','一','二','三','四','五','六'],
 		            	monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
@@ -117,13 +123,16 @@ time Array [开始时间，结束时间]
 						_this.startDate = fType == 'MM-DD' ? picker.startDate.format(fType) : +moment(picker.startDate);
 						_this.endDate = fType == 'MM-DD' ? picker.endDate.format(fType) : +moment(picker.endDate) + (!ops.time ? 0 : (24*3600*1000-1))   //如果精确到日期，表示当前日期最后一秒，要加上23:59:59
 					}
-			  	});
+			  	}).on('clear.daterangepicker', function(ev, picker) {
+			  		$('#'+ ops.id).val('');
+			 		_this.startDate = _this.endDate = '';
+			  	})
 			  	if(_this.startDate){
 				  $('#'+ ops.id).val(moment(_this.startDate).format(fType));
 				  _this.startDate = fType == 'MM-DD' ?  moment(_this.startDate).format(fType) : +moment(_this.startDate)
 				  if(_this.endDate){
-					  $('#'+ ops.id).val($('#'+ ops.id).val() + '-' + (moment(_this.endDate).format(fType)));
-					  _this.endDate = fType == 'MM-DD' ?  moment(_this.endDate).format(fType) : +moment(_this.endDate) + (!ops.time ? 0 : (24*3600*1000-1))  ////如果精确到日期，表示当前日期最后一秒，要加上23:59:59
+					  	$('#'+ ops.id).val($('#'+ ops.id).val() + '-' + (moment(_this.endDate).format(fType)));
+					  	_this.endDate = fType == 'MM-DD' ?  moment(_this.endDate).format(fType) : +moment(_this.endDate) + (!ops.time ? 0 : (24*3600*1000-1))  ////如果精确到日期，表示当前日期最后一秒，要加上23:59:59
 				  }
 			 	}
 				if (ops.check) _this.checkTime();

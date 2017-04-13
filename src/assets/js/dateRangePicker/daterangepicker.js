@@ -31,6 +31,7 @@
         this.linkedCalendars = true;
         this.autoUpdateInput = true;
         this.alwaysShowCalendars = false;
+        this.clearBtnFlag = true;
         this.ranges = {};
 
         this.opens = 'right';
@@ -44,6 +45,7 @@
         this.buttonClasses = 'btn btn-sm';
         this.applyClass = 'btn-success';
         this.cancelClass = 'btn-default';
+        this.clearClass = 'btn-primary';
 
         this.locale = {
             direction: 'ltr',
@@ -51,6 +53,7 @@
             separator: ' - ',
             applyLabel: 'Apply',
             cancelLabel: 'Cancel',
+            clearLabel: 'Clear',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
             daysOfWeek: moment.weekdaysMin(),
@@ -102,6 +105,7 @@
                     '<div class="range_inputs">' +
                         '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
                         '<button class="cancelBtn" type="button"></button>' +
+                        '<button class="clearBtn ml5" type="button"></button> ' +
                     '</div>' +
                 '</div>' +
             '</div>';
@@ -138,6 +142,9 @@
 
             if (typeof options.locale.cancelLabel === 'string')
               this.locale.cancelLabel = options.locale.cancelLabel;
+
+            if (typeof options.locale.clearLabel === 'string')
+              this.locale.clearLabel = options.locale.clearLabel;
 
             if (typeof options.locale.weekLabel === 'string')
               this.locale.weekLabel = options.locale.weekLabel;
@@ -190,6 +197,9 @@
         if (typeof options.cancelClass === 'string')
             this.cancelClass = options.cancelClass;
 
+        if (typeof options.clearClass === 'string')
+            this.clearClass = options.clearClass;
+
         if (typeof options.dateLimit === 'object')
             this.dateLimit = options.dateLimit;
 
@@ -201,6 +211,9 @@
 
         if (typeof options.showWeekNumbers === 'boolean')
             this.showWeekNumbers = options.showWeekNumbers;
+
+        if (typeof options.clearBtnFlag === 'boolean')
+            this.clearBtnFlag = options.clearBtnFlag;
 
         if (typeof options.showISOWeekNumbers === 'boolean')
             this.showISOWeekNumbers = options.showISOWeekNumbers;
@@ -349,10 +362,14 @@
         if (this.timePicker && this.autoApply)
             this.autoApply = false;
 
+        if(!this.clearBtnFlag) {
+            this.container.find('.clearBtn').addClass('hide');
+        }
+
         if (this.autoApply && typeof options.ranges !== 'object') {
             this.container.find('.ranges').hide();
         } else if (this.autoApply) {
-            this.container.find('.applyBtn, .cancelBtn').addClass('hide');
+            this.container.find('.applyBtn, .cancelBtn, .clearBtn').addClass('hide');
         }
 
         if (this.singleDatePicker) {
@@ -380,13 +397,16 @@
         }
 
         //apply CSS classes and labels to buttons
-        this.container.find('.applyBtn, .cancelBtn').addClass(this.buttonClasses);
+        this.container.find('.applyBtn, .cancelBtn, .clearBtn').addClass(this.buttonClasses);
         if (this.applyClass.length)
             this.container.find('.applyBtn').addClass(this.applyClass);
         if (this.cancelClass.length)
             this.container.find('.cancelBtn').addClass(this.cancelClass);
+        if (this.clearClass.length)
+            this.container.find('.clearBtn').addClass(this.clearClass);
         this.container.find('.applyBtn').html(this.locale.applyLabel);
         this.container.find('.cancelBtn').html(this.locale.cancelLabel);
+        this.container.find('.clearBtn').html(this.locale.clearLabel);
 
         //
         // event listeners
@@ -409,6 +429,7 @@
         this.container.find('.ranges')
             .on('click.daterangepicker', 'button.applyBtn', $.proxy(this.clickApply, this))
             .on('click.daterangepicker', 'button.cancelBtn', $.proxy(this.clickCancel, this))
+            .on('click.daterangepicker', 'button.clearBtn', $.proxy(this.clickClear, this))
             .on('click.daterangepicker', 'li', $.proxy(this.clickRange, this))
             .on('mouseenter.daterangepicker', 'li', $.proxy(this.hoverRange, this))
             .on('mouseleave.daterangepicker', 'li', $.proxy(this.updateFormInputs, this));
@@ -1389,6 +1410,13 @@
             this.endDate = this.oldEndDate;
             this.hide();
             this.element.trigger('cancel.daterangepicker', this);
+        },
+
+        clickClear: function(e) {
+            this.startDate = '';
+            this.endDate = '';
+            this.hide();
+            this.element.trigger('clear.daterangepicker', this);
         },
 
         monthOrYearChanged: function(e) {

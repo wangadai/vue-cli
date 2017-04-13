@@ -20,7 +20,6 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 glob.sync('./src/common_css/*.css').forEach(function (v, k){
   baseWebpackConfig.entry[path.basename(v)] = v;
 });
-
 module.exports = merge(baseWebpackConfig, {
   module: {
     loaders: utils.styleLoaders({ sourceMap: false })
@@ -30,7 +29,7 @@ module.exports = merge(baseWebpackConfig, {
     publicPath: '/',
     filename: '[name].js'
   },
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),

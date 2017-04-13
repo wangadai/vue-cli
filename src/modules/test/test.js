@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import 'filters'
 import 'components'
-import Wrap from 'components/c-wrap'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

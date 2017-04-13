@@ -14,13 +14,11 @@ module.exports = {
         assetsSubDirectory: 'static',
         proxyTable: {
             '**/*.json?(*)*': {
-                target: 'http://mall.ekeban.com',
+                target: '',
                 changeOrigin: true,
                 logLevel: "debug",
                 secure: false,
                 pathRewrite: {
-                    '^/admin': '/admin',
-                    '^/user': '/user',
                     '^/': '/'
                 }
             }

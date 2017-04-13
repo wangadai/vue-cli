@@ -17,7 +17,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     loaders: utils.styleLoaders({ sourceMap: false, extract: true })
   },
   // devtool: '#cheap-module-source-map',
-  devtool: false,
+  devtool: 'cheap-eval-source-map',
   output: {
     path: config.build.assetsRoot,
     publicPath:config.build.cdnHost+'/',
@@ -31,6 +31,10 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   },
   plugins: [
+	// new webpack.DllReferencePlugin({
+	//     context: __dirname,
+	//     manifest: require('../dll/vendor-manifest.json')
+	// }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -86,7 +90,7 @@ for (var pathname in pages) {
   //console.log("template:" + pages[pathname]);
   (function (path){
     var conf = {
-      filename: path + '.html',
+      filename: path.replace(/modules/g,'modules') + '.html',
       templateContent: function (templateParams, compilation){
         var tc = jetpack.read( pages[path]);
         tc = htmlXXXInject.headMetaDataInject(tc, header_metadata);

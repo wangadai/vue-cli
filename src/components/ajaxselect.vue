@@ -1,9 +1,15 @@
 <template>
-    <div class="dib">
-        <label class="label" v-if="ops.label">{{ops.label || ''}}</label>
-        <select :id="ops.id || 'ajaxselect2'" :class="ops.width || 'w200'"></select>
-        <label class="label" :class="ops.member ? 'ml30' : ''" v-if="ops.children && ops.children.label">{{ops.children.label || ''}}</label>
-        <select :id="ops.children.id || 'ajaxselect2children'" :class="ops.width || 'w200'" v-if="ops.children"></select>
+    <div class="dib p0">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="label" v-if="ops.label">{{ops.label || ''}}</label>
+                <select :id="ops.id || 'ajaxselect2'" :class="ops.width || 'w200'"></select>
+            </div>
+            <div class="col-md-6">
+                <label class="label" v-if="ops.children && ops.children.label">{{ops.children.label || ''}}</label>
+                <select :id="ops.children.id || 'ajaxselect2children'" :class="ops.width || 'w200'" v-if="ops.children"></select>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -161,7 +167,6 @@ export default {
     }
 }
 </script>
-
 <style scoped>
     .label{width: 95px;text-align: right;white-space: nowrap;display: inline-block;max-width: 100%;margin-bottom: 5px;font-weight: bold;color: #444;font-size: 14px;padding: 0;letter-spacing: 0;}
 </style>

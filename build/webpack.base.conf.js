@@ -43,6 +43,7 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'src': path.resolve(__dirname, '../src'),
+      'api': path.resolve(__dirname, '../src/api'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'filters': path.resolve(__dirname, '../src/filters'),
       'libs': path.resolve(__dirname, '../src/libs'),
@@ -75,9 +76,9 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader?cacheDirectory',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules|libs/
       },
       {
         test: /\.json$/,

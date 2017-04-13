@@ -68,11 +68,13 @@ export default {
     },
     watch: {
         value(v) {
-            this.detailObject.setValue({
-                province: v.province,
-                city: v.city,
-                district: v.district,
-            })
+            setTimeout( () => {
+                this.detailObject.setValue({
+                    province: v.province,
+                    city: v.city,
+                    district: v.district,
+                })
+            }, 200);
         },
         'options.flag': function(v) {
             if (v) {
