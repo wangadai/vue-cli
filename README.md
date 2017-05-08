@@ -1,7 +1,3 @@
-# xiya_admin
-
-
-
 ## Build Setup
 
 #### install dependencies
@@ -61,7 +57,7 @@ A：在`/ajax/data.js`的接口数据中添加`delay`参数，值的单位为毫
 ### `/src/assets/font`目录为`iconfont`目录
 ### `/src/common_modules`目录为公用的页面模版，如公用的页头页尾，公用的`html meta`配置
 ### `/src/components`目录为公用的`vuejs`组件，如公用的`ui button`组件
-### `/src/libs`目录为公用的类库，如`jquery`、`bootstrap`，默认`jquery`优先加载
+### `/src/libs`目录为公用的类库，如`jquery`、`bootstrap`
 ### `/src/modules`目录为页面，包括`css`、`js`、`html`、`.vue`
 ### `/src/common_css`目录为公共的`css`文件。由`/src/webpack_plugins/insert_global_css`把`/src/common_css`目录中的所有`css`文件插入到生成的页面中的`head`标签
 

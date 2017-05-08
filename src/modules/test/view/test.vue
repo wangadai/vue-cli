@@ -1,19 +1,26 @@
 <template>
     <div class="card-box">
-        11111111111111111
+        <table class="formTable">
+            111111111111111
+        </table>
     </div>
 </template>
 
 <script>
 export default {
-    components: {},
-    data() {
-        return {}
+    components: {
+        
     },
-    mounted() {},
-    methods: {}
+    data() {
+        return {
+            
+        }
+    },
+    mounted() {
+        
+    },
+    methods: {
+
+    }
 };
 </script>
-<style scoped>
-    
-</style>

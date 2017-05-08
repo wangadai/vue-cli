@@ -13,15 +13,15 @@ module.exports = {
     dev: {
         assetsSubDirectory: 'static',
         proxyTable: {
-            '**/*.json?(*)*': {
-                target: '',
-                changeOrigin: true,
-                logLevel: "debug",
-                secure: false,
-                pathRewrite: {
-                    '^/': '/'
-                }
-            }
+            // '**/*.json?(*)*': {
+            //     target: '',
+            //     changeOrigin: true,
+            //     logLevel: "debug",
+            //     secure: false,
+            //     pathRewrite: {
+            //         '^/': '/'
+            //     }
+            // }
         }
     }
 }
