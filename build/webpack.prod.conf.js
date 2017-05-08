@@ -85,7 +85,7 @@ function getEntry(globPath) {
 module.exports = webpackConfig
 
 var pages = getEntry('./src/modules/**/*.html');
-var header_metadata = jetpack.read(baseWebpackConfig.common_modules.header_metadata);
+var header = jetpack.read(baseWebpackConfig.common_modules.header);
 //console.log("prod pages----------------------");
 for (var pathname in pages) {
   // 配置生成的html文件，定义路径等
@@ -96,7 +96,7 @@ for (var pathname in pages) {
             filename: path.replace(/modules/g, 'modules') + '.html',
             templateContent: function(templateParams, compilation) {
                 var tc = jetpack.read(pages[path]);
-                tc = htmlXXXInject.headMetaDataInject(tc, header_metadata);
+                tc = htmlXXXInject.headMetaDataInject(tc, header);
 
                 return tc;
             },

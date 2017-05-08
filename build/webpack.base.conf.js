@@ -43,8 +43,6 @@ module.exports = {
             'src': path.resolve(__dirname, '../src'),
             'api': path.resolve(__dirname, '../src/api'),
             'assets': path.resolve(__dirname, '../src/assets'),
-            'filters': path.resolve(__dirname, '../src/filters'),
-            'libs': path.resolve(__dirname, '../src/libs'),
             'utils': path.resolve(__dirname, '../src/utils'),
             'components': path.resolve(__dirname, '../src/components')
         }
@@ -94,7 +92,7 @@ module.exports = {
     },
     //公共的module模版
     common_modules: {
-        header_metadata: path.resolve(__dirname, '../src/common_modules/header_metadata.html')
+        header: path.resolve(__dirname, '../src/common_modules/header.html')
     },
     quiet: true,
     plugins: [
